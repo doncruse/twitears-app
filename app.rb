@@ -116,6 +116,7 @@ get '/show' do
   # check to make sure other user is not too cool for school
   other_user_obj = lookup_user_on_twitter(@otheruser)
   if other_user_obj.nil?
+    @error = "Couldn't find that user."
     redirect '/'
   end
 
