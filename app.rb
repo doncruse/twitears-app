@@ -163,7 +163,7 @@ get '/show' do
 
   friendship = @client.friendships.show? :target_screen_name => @otheruser
 
-  return "Friendship object:\n\n#{friendship.inspect}"
+  return "Friendship object:\n\n#{friendship.target.inspect}"
 
   @following = do_they_follow_you(@otheruser, @id)
 
