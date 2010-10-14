@@ -145,13 +145,12 @@ module Ear
   end
 
   def do_they_follow_you(otheruser, your_id)
-    begin
-      friendship = @client.friendships.show? :source_id => your_id, :target_screen_name => otheruser
-      return true if friendship.target.following
-      return false
-    rescue
-      return false
-    end
+#    begin
+      friendship = @client.friendships.show? :target_screen_name => otheruser
+      return friendship.target.following
+#    rescue
+#      return false
+#    end
   end
 
 end
