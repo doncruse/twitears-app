@@ -161,7 +161,7 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
-  friendship = @client.friendships.show? :target_screen_name => @otheruser
+  friendship = @client.friendships.show.json? :target_screen_name => @otheruser
 
   return "Friendship object:\n\n#{friendship.to_hash.inspect}"
 
