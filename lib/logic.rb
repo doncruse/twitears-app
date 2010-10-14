@@ -59,10 +59,10 @@ module Ear
 
   def lookup_user_on_twitter(username)
     begin
-      #result = Sinatra::Cache.cache("#{username}-object") do
+      result = Sinatra::Cache.cache("#{username}-object") do
         @client.users.show? :screen_name => username
-      #end
-      #result
+      end
+      result
     rescue
       return nil
     end
@@ -72,7 +72,7 @@ module Ear
   def get_follower_info(username)
     begin
       #result = Sinatra::Cache.cache("#{username}-follower-ids") do
-        @client.follower_ids? :screen_name => username
+        @client.followers.ids? :screen_name => username
       #end
       #result
     rescue

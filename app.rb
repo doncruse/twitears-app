@@ -16,6 +16,7 @@ require 'lib/logic'
 include Ear
 
 POPULARITY_LIMIT = 75000
+DEFAULT_TTL = 7200
 
 # renamed @client to @twitter to fit how I've set this up...
 before do
