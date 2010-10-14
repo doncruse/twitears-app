@@ -155,7 +155,7 @@ get '/show' do
 end
 
 post '/show' do
-  redirect '/' if params[:otheruser].blank?
+  redirect '/' if params[:otheruser].empty?
   redirect "/show?otheruser=#{params[:otheruser]}"
 end
 
