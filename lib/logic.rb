@@ -58,23 +58,22 @@ module Ear
   ####################
 
   def lookup_user_on_twitter(username)
+    # try cached copy
     begin
-      result = Sinatra::Cache.cache("#{username}-object") do
-        @client.users.show? :screen_name => username
-      end
-      result
+      result = CACHE.get("#{username-object}")
     rescue
-      return nil
+      result = @client.users.show? :screen_name => username
+      if result and result.screen_name
+        CACHE.set("#{result.screen_name}",result)
+      end
     end
+    result
   end
   
   
   def get_follower_info(username)
     begin
-      #result = Sinatra::Cache.cache("#{username}-follower-ids") do
-        @client.followers.ids? :screen_name => username
-      #end
-      #result
+      @client.followers.ids? :screen_name => username
     rescue
       false
     end
@@ -88,7 +87,7 @@ module Ear
     end
   end
 
-  # pagination has been replaced with cursors
+  # N.B., pagination has been replaced with cursors
   def load_follower_objects(username, page_count)
     follower_set = {}
     (1..page_count).each do |x|

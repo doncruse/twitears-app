@@ -15,8 +15,13 @@ require 'lib/cache'
 require 'lib/logic'
 include Ear
 
-POPULARITY_LIMIT = 75000
+POPULARITY_LIMIT = 5000
 DEFAULT_TTL = 7200
+
+configure do
+  require 'memcached'
+  CACHE = Memcached.new
+end
 
 # renamed @client to @twitter to fit how I've set this up...
 before do
@@ -128,8 +133,6 @@ get '/show' do
   my_follows = get_follower_info(@user_name)
   other_follows = get_follower_info(@otheruser)
 
-  return "Got follower info:\n\n#{other_follows.inspect}"
-
   if my_follows == false
     @error = "That username does not seem to have any followers."
     redirect '/'
@@ -144,6 +147,8 @@ get '/show' do
     reset_follower_count(@no)
     # TODO: may want to alert user or trigger a cache refresh
   end
+
+  return "Made it to threshold"
 
   follower_set = Sinatra::Cache.cache("#{@username}-follower-objects") do
     pages = calculate_page_count(my_follows.size)
