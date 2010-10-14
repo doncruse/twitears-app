@@ -3,4 +3,4 @@ oauth
 grackle
 haml
 activesupport
-memcached-northscale, :lib => 'memcached'
+memcached
