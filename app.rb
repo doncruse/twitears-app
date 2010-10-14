@@ -98,7 +98,7 @@ post '/user' do
 #      set_user_info(user_obj)
 #      if request.cookies["user_info"].blank?  # if the browser chokes on persistent cookie
 #        set_session_user_info(user_obj)
-      end
+#      end
       redirect '/'
     end
   end
