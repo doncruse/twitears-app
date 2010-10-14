@@ -106,9 +106,9 @@ end
 
 get '/show' do
   load_user_info
-  @otheruser = params[:otheruser]
+  @otheruser = params[:otheruser] || ""
 
-  if (@otheruser.downcase == @username.downcase)
+  if (@otheruser.downcase == @user_name.downcase)
     @error = "That's you!  It takes two to have a conversation."
     redirect '/'
   end
@@ -123,7 +123,7 @@ get '/show' do
     erb :popularity
   else
 
-  my_follows = get_follower_info(@username)
+  my_follows = get_follower_info(@user_name)
   other_follows = get_follower_info(@otheruser)
 
   if my_follows == false
@@ -143,7 +143,7 @@ get '/show' do
 
   follower_set = Sinatra::Cache.cache("#{@username}-follower-objects") do
     pages = calculate_page_count(my_follows.size)
-    load_follower_objects(@username, pages)
+    load_follower_objects(@user_name, pages)
   end
 
   @joined = mutual_followers(my_follows, other_follows, follower_set)
