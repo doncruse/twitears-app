@@ -161,6 +161,10 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
+  friendship = @client.friendships.show? :target_screen_name => @otheruser
+
+  return "Friendship object:\n\n#{friendship.inspect}"
+
   @following = do_they_follow_you(@otheruser, @id)
 
   return "Did the join\n\n#{@following.inspect}"
