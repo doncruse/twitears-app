@@ -9,11 +9,11 @@ module Ear
     unless @client and (current_user = @client.account.verify_credentials?)
       redirect '/'
     end
-    @user_name = current_user[:screen_name]
-    @user_id = current_user[:id]
-    @name = current_user[:name]
-    @icon = current_user[:profile_image_url]
-    @no = current_user[:followers_count]
+    @user_name = current_user.screen_name
+    @user_id = current_user.id
+    @name = current_user.name
+    @icon = current_user.profile_image_url
+    @no = current_user.followers_count
   end
 
   def too_popular(user_obj)
