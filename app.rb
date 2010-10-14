@@ -4,7 +4,7 @@ require "oauth"
 require "oauth/consumer"
 require 'grackle'
 require 'haml'
-require 'activesupport'
+#require 'active_support'
 
 enable :sessions
 
