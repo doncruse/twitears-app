@@ -72,11 +72,11 @@ module Ear
   
   def user_by_id_from_cache(id)
     begin
-      result = CACHE.get(id)
+      result = CACHE.get(id.to_s)
     rescue
       result = @client.users.show? :id => id
       if result and result.id
-        CACHE.set(id,result)
+        CACHE.set(id.to_s,result)
       end
     end
   end
