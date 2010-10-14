@@ -108,12 +108,12 @@ get '/show' do
   load_user_info
   @otheruser = params[:otheruser] || ""
 
-  logger.info("You're in the /show method")
-
   if (@otheruser.downcase == @user_name.downcase)
     @error = "That's you!  It takes two to have a conversation."
     redirect '/'
   end
+
+  return 'Made it past downcase check'
 
   # check to make sure other user is not too cool for school
   other_user_obj = lookup_user_on_twitter(@otheruser)
