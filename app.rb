@@ -1,4 +1,4 @@
-require "rubygems"
+# require "rubygems"
 require "sinatra"
 require "oauth"
 require "oauth/consumer"
