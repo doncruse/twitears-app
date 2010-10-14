@@ -148,14 +148,14 @@ get '/show' do
     # TODO: may want to alert user or trigger a cache refresh
   end
 
-  return "Made it to threshold"
+  @joined = mutual_followers(my_follows, other_follows, follower_set)
+
+  return "Did the join\n\n#{@joined.inspect}"
 
   follower_set = Sinatra::Cache.cache("#{@username}-follower-objects") do
     pages = calculate_page_count(my_follows.size)
     load_follower_objects(@user_name, pages)
   end
-
-  @joined = mutual_followers(my_follows, other_follows, follower_set)
 
   @following = do_they_follow_you(@otheruser, @id)
 
