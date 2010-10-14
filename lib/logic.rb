@@ -60,7 +60,7 @@ module Ear
   def lookup_user_on_twitter(username)
     # try cached copy
     begin
-      result = CACHE.get("#{username-object}")
+      result = CACHE.get("#{username}-object}")
     rescue
       result = @client.users.show? :screen_name => username
       if result and result.screen_name
@@ -70,6 +70,16 @@ module Ear
     result
   end
   
+  def user_by_id_from_cache(id)
+    begin
+      result = CACHE.get(id)
+    rescue
+      result = @client.users.show? :id => id
+      if result and result.id
+        CACHE.set(id,result)
+      end
+    end
+  end
   
   def get_follower_info(username)
     begin
@@ -79,6 +89,7 @@ module Ear
     end
   end
 
+=begin
   def calculate_page_count(follower_count)
     begin
       (follower_count / 100).to_i + 1
@@ -103,10 +114,13 @@ module Ear
   def retrieve_follower_objects(username)
     # get from cache OR retrieve
   end
+=end
+  
   
   # Calculations
   ##############
   
+=begin
   def mutual_followers(my_follows, other_follows, follower_set)
     joined_ids = other_follows & my_follows
     joined_followers = []
@@ -116,11 +130,24 @@ module Ear
     end
     joined_followers
   end
+=end
+
+  def mutual_follower_ids(my_follows, other_follows)
+    other_follows & my_follows
+  end
+
+  def populate_mutual_followers(mutual_ids)
+    result = []
+    mutual_ids.each do |id|
+      result << user_by_id_from_cache(id)
+    end
+    result
+  end
 
   def do_they_follow_you(otheruser, your_id)
     begin
-      other_following = get_follower_info(otheruser)
-      return true if other_following.include?(your_id)
+      friendship = @client.friendships.show? :source_id => your_id, :target_screen_name => otheruser
+      return true if friendship.target.following
       return false
     rescue
       return false
