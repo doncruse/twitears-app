@@ -113,14 +113,14 @@ get '/show' do
     redirect '/'
   end
 
-  return "Loaded a user object:\n\n#{@otheruser}"
-
   # check to make sure other user is not too cool for school
   other_user_obj = lookup_user_on_twitter(@otheruser)
   if other_user_obj.nil?
     @error = "Couldn't find that user."
     redirect '/'
   end
+
+  return "Loaded a user object:\n\n#{other_user_obj.inspect}"
 
   if too_popular(other_user_obj)
     erb :popularity
