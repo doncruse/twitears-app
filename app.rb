@@ -159,8 +159,7 @@ get '/show' do
 #  end
 
   joined_ids = mutual_follower_ids(my_follows, other_follows)
-
-  @joined = populate_mutual_followers
+  @joined = populate_mutual_followers(joined_ids)
 
   return "Did the join\n\n#{@joined.inspect}"
 
