@@ -60,7 +60,7 @@ module Ear
   def lookup_user_on_twitter(username)
     begin
       result = Sinatra::Cache.cache("#{username}-object") do
-        @client.users.show? username
+        @client.users.lookup? username
       end
       result
     rescue
