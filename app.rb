@@ -161,8 +161,6 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
-  return "Did the join\n\n#{@joined.inspect}"
-
   @following = do_they_follow_you(@otheruser, @id)
 
   erb :results
