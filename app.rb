@@ -120,14 +120,14 @@ get '/show' do
     redirect '/'
   end
 
-  return "Loaded a user object:\n\n#{other_user_obj.inspect}"
-
   if too_popular(other_user_obj)
     erb :popularity
   else
 
   my_follows = get_follower_info(@user_name)
   other_follows = get_follower_info(@otheruser)
+
+  return "Got follower info:\n\n#{other_follows.inspect}"
 
   if my_follows == false
     @error = "That username does not seem to have any followers."
