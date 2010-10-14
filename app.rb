@@ -108,6 +108,8 @@ get '/show' do
   load_user_info
   @otheruser = params[:otheruser] || ""
 
+  logger.info("You're in the /show method")
+
   if (@otheruser.downcase == @user_name.downcase)
     @error = "That's you!  It takes two to have a conversation."
     redirect '/'
