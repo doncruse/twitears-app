@@ -1,0 +1,33 @@
+<div id="user_box">
+	<div id="change_user_link"><a href="/logout">logout</a></div>
+	<div id="username">@<%= @username %></div>
+	<div id="follower_count">has <%= @no %> followers</div>
+</div>
+<div id="target_box">
+<form method="post" action="/show">
+<label>@</label><input type="text" name="otheruser" value="<%= @otheruser %>" /><button type="submit" onclick="this.setAttribute('originalValue', this.value);this.disabled=true;this.value='Please wait...';;result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false };return result;">Go!</button>
+</form>
+</div>
+
+<%= following_me_status(@following) %>
+<style>
+#profile_link a, #profile_link a:visited, #profile_link a:hover { background-color: #048; color: #fff; padding: 3px 10px; margin: 0px auto 18px auto; text-align: center; text-decoration: none; font-size: 0.8em; width: 150px; display: block;}
+</style>
+<div id="profile_link"><a href="http://twitter.com/<%= @otheruser %>">see their profile page</a></div>
+<div id="results_cloud_intro">
+<%= results_cloud_intro(@joined.size, @following) %> who will see your @ reply conversation with @<%= @otheruser %> by default.
+</div>
+
+<div id="results_cloud">
+<ul>
+<% for item in @joined %>
+<div class="cloud_item">
+<a href="http://twitears.com/show?otheruser=<%= item[:screen_name] %>"><img src="<%= item[:icon] %>" alt="@" width=48 height=48><br /><%= item[:name] %></a></div>
+<% end %>
+</ul>
+<div style="clear: both;"></div>
+</div>
+
+<div id="about_box" style="text-align: right; font-size: 0.8em;">
+<p><a href="/about">What does this all mean?</a></p>
+</div>

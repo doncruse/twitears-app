@@ -1,13 +1,13 @@
-directions using heroku for hosting:
+TwitEars
+===========
+This is a simple Twitter app that tells you who is likely to be listening to your @-reply conversations.
 
-create twitter app at http://twitter.com/apps
-for callback url use http://<appname>.heroku.com/auth
-note consumer key and consumer secret
+Background
+==========
+By default, you see some but not all @ replies in Twitter.  What you see are @ replies *from* people you subscribe that are sent *to* people you subscribe.  In other words, you see conversations of people where you are following both halves of the conversation.
 
-heroku create <appname>
-heroku config:add consumer_key=<consumer key from twitter> consumer_secret=<consume secret from twitter>
-git push heroku master
+You can change those settings.  You can turn off @ replies, but that loses most of the fun.  If you're a marketing pro, you can turn on all @ replies ... which gets too much info.
 
-inspired by
-http://github.com/filiptepper/sinatra-oauth-1.0a-example
-http://github.com/moomerman/sinitter
+Ownership
+=========
+This software is (c)2009 by Don Cruse.

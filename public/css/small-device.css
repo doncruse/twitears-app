@@ -1,0 +1,50 @@
+#body { background-color: #048; color: #fff; font-family: helvetica, arial, sans-serif; padding: 0px; margin: 0px;}
+#header { background-color: #048; color: #fff; font-size: 2.2em; text-align: center; font-weight: bold; margin-top: 8px; margin-bottom: 8px; }
+#header a, #header a:hover, #header a:visited { text-decoration: none; color: inherit; }
+#main { background-color: #e8e8e8; color: #333; margin: 2px 10px; border: 1px solid #e8e8e8; padding: 2px 2px; -webkit-border-radius: 10px;}
+#user_box { color: #333; background-color: #e8e8e8; text-align: center; padding-top: 2px; padding-bottom: 5px; font-size: 0.9em; }
+#username { font-weight: bold; font-size: 1.4em; }
+#follower_count { color: #555; font-size: 0.9em; font-style: italic; }
+#change_user_link { color: #555; font-size: 0.8em; text-decoration: none; text-align: right; padding-right: 4px; }
+#change_user_link a, #change_user_link a:visited { color: #048; text-decoration: none; padding: 0px 6px; }
+#change_user_link a:hover { color: #f0f0f0; background: #048; text-decoration: none;  padding: 0px 6px;}
+
+#target_box { margin-top: 22px; text-align: center; margin-bottom: 14px; }
+#result_box { text-align: center; }
+#about_box { font-size: 1.0em; margin-right: 8px;}
+#about_box a, #about_box a:visited, #about_box a:hover { color: #048; text-decoration: none; font-style: italic;}
+
+#empty_box { text-align: center; font-color: #666; margin: 5px 10px 15px 10px ; font-size: 1.2em; }
+#start_box { text-align: left; font-size: 1.0em; margin: 0px; padding: 0px 12% 0px 16%; line-height: 1.3em; color: #333; background-color: #e8e8e8; }
+#no_celebs { font-size: 0.7em; color: #666; text-align: right; }
+
+#no_pass_required { font-size: 1.0em; color: #666; font-style: italic; margin-top: 0px; margin-bottom: 3px;}
+.start_hi { }
+#error_msg { color: red; text-align: center; }
+
+input { font-size: 1.1em; }
+button { font-size: 1.1em;}
+label { font-size: 1.1em;}
+form { margin-bottom: 4px; }
+
+#about_box { font-size: 1.1em; line-height: 1.2em; margin: 10px 7% 10px 10%; }
+#about_box h3 { font-size: 1.1em; font-weight: bold; margin-bottom: 8px; margin-top: 10px; margin-left: 20px; margin-right: 20px; text-align: center; }
+#about_box p { margin-top: 0px;}
+
+/* watch these margins when reduce size */
+.following_me_status { text-align: center; margin: 5px 2px 15px 2px; font-size: 1.3em; }
+#follows_yes { background-color: #33aa33; color: #fff; padding: 4px; }
+#follows_no { background-color: #cc3333; color: #fff; padding: 4px; font-size: 1.2em;}
+
+#results_cloud_intro { text-align: center; margin: 5px 15% 15px 15%; font-size: 1.1em; color: #777799; }
+.cloud_hi { color: #3333ff; }
+#results_cloud { }
+#results_cloud a, #results_cloud a:hover, #results_cloud a:visited { font-size: 0.8em; color: #333; text-decoration: none; }
+#results_cloud img { border: none; margin-bottom: 3px; }
+.cloud_item { padding-top: 15px; background-color: #d8d8d8; width: 100px; margin: 4px; height: 80px; float: left; text-align: center; -webkit-box-shadow: 10px 10px 5px #888; -webkit-padding: 5px 5px 5px 15px; text-overflow: clip; }
+
+
+#footer { width: 300px; margin-left: auto; margin-right: auto; color: #666; font-size: 1.0em; margin-top: 16px; text-align: center; }
+#versions { display: none; }
+#vanity_follow { color: #e8e8e8; padding-bottom: 12px;}
+#vanity_follow a, #vanity_follow a:hover, #vanity_follow a:visited { color: #ffffcc; font-weight: bold; text-decoration: none; }

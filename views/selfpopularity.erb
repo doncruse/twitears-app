@@ -1,0 +1,18 @@
+
+<div id="user_box">
+	<h3>Please enter a Twitter user name.</h3>
+	<div id="results_cloud_intro">
+	@<%= @popular_user %> has more than <%= POPULARITY_LIMIT %> followers.<br/><br />TwitEars cannot yet display results for someone so popular.<br />
+	</div>	<form method="post" action="/user">
+	<label>@</label><input type="text" name="username" value="<%= @username %>" /> <button type="submit">Enter</button>
+	</form>
+	<div id="no_pass_required">No password is required.</div>
+</div>
+<div id="start_box">
+<p>Enter another username to find out who else would overhear your <span class="start_hi">@reply conversation</span>.</p>
+</div>
+<div id="about_box" style="text-align: right; font-size: 0.8em;">
+<p><a href="/about">What does this all mean?</a></p>
+</div>
+
+

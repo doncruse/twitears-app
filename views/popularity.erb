@@ -1,0 +1,22 @@
+<div id="user_box">
+	<div id="change_user_link"><a href="/logout">logout</a></div>
+	<div id="username">@<%= @username %></div>
+	<div id="follower_count">has <%= @no %> followers</div>
+</div>
+<div id="target_box">
+<form method="post" action="/show">
+<label>@</label><input type="text" name="otheruser" value="" /><button type="submit">Go!</button>
+</form>
+</div>
+
+<div id="results_cloud_intro">
+@<%= @otheruser %> has more than <%= POPULARITY_LIMIT %> followers.<br/><br />TwitEars cannot yet display results for someone so popular.<br />
+</div>
+
+<div id="results_cloud">
+<div style="clear: both;"></div>
+</div>
+
+<div id="about_box" style="text-align: right; font-size: 0.8em;">
+<p><a href="/about">What's this site about?</a></p>
+</div>

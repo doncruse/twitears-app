@@ -4,9 +4,20 @@ require "oauth"
 require "oauth/consumer"
 require 'grackle'
 require 'haml'
+require 'activesupport'
 
 enable :sessions
 
+# TODO: See what changes are needed from using Grackle instead of Twitter
+# or see if I can fall back to the Twitter gem...
+# require 'twitter'
+require 'lib/cache'
+require 'lib/logic'
+include Ear
+
+POPULARITY_LIMIT = 75000
+
+# renamed @client to @twitter to fit how I've set this up...
 before do
   session[:oauth] ||= {}  
   
@@ -34,14 +45,125 @@ before do
   end
 end
 
-get "/" do
-  if @access_token
-    @statuses = @client.statuses.friends_timeline? :count => 100
-    haml :index
-  else
-    '<a href="/request">Sign On</a>'
+# to simplify this part of the results screen
+helpers do
+  def following_me_status(following)
+    if following
+      "<div class='following_me_status' id='follows_yes'>This person follows you.</div>"
+    else
+      "<div class='following_me_status' id='follows_no'>This person does <strong>not</strong> follow you.</div>"
+    end
+  end
+
+  def results_cloud_intro(joined_size, following)
+    if following and joined_size == 0
+      "But you do not have any other mutual followers"
+    elsif following and joined_size == 1
+      "And you have <span class='cloud_hi'>1 mutual follower</span>"
+    elsif following
+      "And you have <span class='cloud_hi'>#{joined_size} mutual followers</span>"
+    elsif joined_size == 0
+      "And you do not have any mutual followers"
+    elsif joined_size == 1
+      "But you do have <span class='cloud_hi'>1 mutual follower</span>"
+    else
+      "But you do have <span class='cloud_hi'>#{joined_size} mutual followers</span>"
+    end
   end
 end
+
+##########################
+
+get '/' do
+  if @access_token
+    load_user_info
+    erb :home
+  else
+    erb :start
+  end
+end
+
+post '/user' do
+  if params[:username].blank?
+#    response.delete_cookie("user_info")
+    @access_token = nil
+    erb :start
+  else
+    user_obj = lookup_user_on_twitter(params[:username].downcase)
+    if too_popular(user_obj)  
+      @popular_user = params[:username] || "You"
+#      response.delete_cookie("user_info")
+      erb :selfpopularity
+#    else
+#      set_user_info(user_obj)
+#      if request.cookies["user_info"].blank?  # if the browser chokes on persistent cookie
+#        set_session_user_info(user_obj)
+      end
+      redirect '/'
+    end
+  end
+end
+
+get '/show' do
+  load_user_info
+  @otheruser = params[:otheruser]
+
+  if (@otheruser.downcase == @username.downcase)
+    @error = "That's you!  It takes two to have a conversation."
+    redirect '/'
+  end
+
+  # check to make sure other user is not too cool for school
+  other_user_obj = lookup_user_on_twitter(@otheruser)
+  if other_user_obj.nil?
+    redirect '/'
+  end
+
+  if too_popular(other_user_obj)
+    erb :popularity
+  else
+
+  my_follows = get_follower_info(@username)
+  other_follows = get_follower_info(@otheruser)
+
+  if my_follows == false
+    @error = "That username does not seem to have any followers."
+    redirect '/'
+  end
+
+  if other_follows == false
+    @error = "Twitter choked on that username.  Please try again."
+    redirect '/'
+  end
+
+  unless (my_follows.size == @no)
+    reset_follower_count(@no)
+    # TODO: may want to alert user or trigger a cache refresh
+  end
+
+  follower_set = Sinatra::Cache.cache("#{@username}-follower-objects") do
+    pages = calculate_page_count(my_follows.size)
+    load_follower_objects(@username, pages)
+  end
+
+  @joined = mutual_followers(my_follows, other_follows, follower_set)
+
+  @following = do_they_follow_you(@otheruser, @id)
+
+  erb :results
+  end
+end
+
+post '/show' do
+  redirect '/' if params[:otheruser].blank?
+  redirect "/show?otheruser=#{params[:otheruser]}"
+end
+
+get '/about' do
+  erb :about
+end
+
+## Oauth methods for Twitter
 
 get "/request" do
   @request_token = @consumer.get_request_token(:oauth_callback => "http://#{request.host}/auth")
@@ -58,6 +180,8 @@ get "/auth" do
 end
 
 get "/logout" do
+  response.delete_cookie("user_info")
+  @access_token = nil
   session[:oauth] = {}
-  redirect "/"
+  erb :start
 end

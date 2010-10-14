@@ -2,3 +2,4 @@ sinatra
 oauth
 grackle
 haml
+activesupport

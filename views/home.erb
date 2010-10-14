@@ -1,0 +1,24 @@
+<div id="user_box">
+	<div id="change_user_link"><a href="/logout">change user</a></div>
+	<div id="username">@<%= @username %></div>
+	<div id="follower_count">with <%= @no %> followers</div>
+</div>
+
+<div id="error_msg">
+	<%= @error %>
+</div>
+
+
+<div id="start_box">
+<p>Enter another username to find out who would overhear your <span class="start_hi">@reply conversation</span>.</p>
+<div id="no_celebs">(This does not yet work for celebrities.)</div>
+</div>
+<div id="target_box">
+<form method="post" action="/show">
+<label>@</label><input type="text" name="otheruser" value="" />
+<div style="margin-top: 8px;"><button type="submit">Go!</button></div>
+</form>
+</div>
+<div id="about_box" style="text-align: right; font-size: 0.8em;">
+<p><a href="/about">What does this all mean?</a></p>
+</div>

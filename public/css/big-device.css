@@ -1,0 +1,47 @@
+#body { background-color: #f0f0f0; color: #333; font-family: helvetica, arial, sans-serif; }
+#header { color: #fff; background-color: #048; font-size: 3.6em; text-align: center; font-weight: bold; margin-top: 40px; margin-bottom: 0px; width: 500px; margin-left: auto; margin-right: auto; padding: 10px;}
+#header a, #header a:hover, #header a:visited { text-decoration: none; color: #fff; }
+#main { width: 514px; margin-left: auto; margin-right: auto; border-left: 3px #048 solid; border-right: 3px #048 solid; border-bottom: 3px #048 solid; }
+#user_box { background-color: #ccc; text-align: center; padding-top: 2px; padding-bottom: 12px; }
+#username { font-weight: bold; font-size: 1.8em; }
+#follower_count { color: #555; font-size: 1.2em; font-style: italic; }
+#change_user_link { color: #555; font-size: 1.0em; text-decoration: none; text-align: right; padding-right: 4px; }
+#change_user_link a, #change_user_link a:visited { color: #048; text-decoration: none; padding: 0px 6px; }
+#change_user_link a:hover { color: #f0f0f0; background: #048; text-decoration: none;  padding: 0px 6px;}
+#target_box { margin-top: 22px; font-size: 1.4em; text-align: center; margin-bottom: 14px; }
+#result_box { text-align: center; }
+#about_box { font-size: 1.0em; margin-right: 8px;}
+#about_box a, #about_box a:visited, #about_box a:hover { color: #048; text-decoration: none; font-style: italic;}
+
+#empty_box { text-align: center; font-color: #666; margin: 20px; font-size: 1.2em; }
+#start_box { text-align: justify; font-size: 1.3em; margin: 4px 15%; line-height: 1.3em; color: #246; }
+#no_celebs { font-size: 0.8em; color: #666; text-align: right; }
+
+/* watch these margins when reduce size */
+.following_me_status { text-align: center; margin: 5px 15% 15px 15%; font-size: 1.3em; }
+#follows_yes { background-color: #33aa33; color: #fff; padding: 4px; }
+#follows_no { background-color: #cc3333; color: #fff; padding: 4px; font-size: 1.2em;}
+
+input { font-size: 1.3em; }
+button { font-size: 1.1em; -moz-border-radius: 4px; }
+label { font-size: 1.3em; }
+form { margin-bottom: 4px; }
+
+#results_cloud_intro { text-align: center; margin: 5px 15% 15px 15%; font-size: 1.1em; color: #777799; }
+.cloud_hi { color: #3333ff; }
+#results_cloud { }
+#results_cloud a, #results_cloud a:hover, #results_cloud a:visited { font-size: 0.8em; color: #333; text-decoration: none; }
+#results_cloud img { border: none; margin-bottom: 3px; }
+.cloud_item { padding-top: 15px; background-color: #d8d8d8; width: 100px; margin: 4px; height: 80px; float: left; text-align: center; -webkit-box-shadow: 10px 10px 5px #888; -webkit-padding: 5px 5px 5px 15px; text-overflow: clip; }
+
+#no_pass_required { font-size: 0.8em; color: #333; font-style: italic; margin-top: 9px; margin-bottom: 3px;}
+.start_hi { }
+
+#about_box { font-size: 1.1em; line-height: 1.2em; margin: 0px 7% 10px 10%; }
+#about_box h3 { font-size: 1.2em; font-weight: bold; margin-bottom: 8px; margin-top: 0px; padding-top: 12px; text-align: center; }
+#about_box p { margin-top: 0px;}
+
+#footer { width: 400px; margin-left: auto; margin-right: auto; color: #666; font-size: 1.0em; margin-top: 20px; text-align: center; }
+#versions { font-size: 0.9em; margin-top: 12px; color: #579;}
+#vanity_follow { font-size: 0.9em;}
+#vanity_follow a, #vanity_follow a:hover, #vanity_follow a:visited { color: #048; font-weight: bold; text-decoration: none; }
