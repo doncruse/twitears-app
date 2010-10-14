@@ -60,7 +60,7 @@ module Ear
   def lookup_user_on_twitter(username)
     begin
       result = Sinatra::Cache.cache("#{username}-object") do
-        @client.users.show.username?
+        @client.users.show? username
       end
       result
     rescue
@@ -72,7 +72,7 @@ module Ear
   def get_follower_info(username)
     begin
       result = Sinatra::Cache.cache("#{username}-follower-ids") do
-        @client.follower_ids.username?
+        @client.follower_ids? username
       end
       result
     rescue
@@ -92,7 +92,7 @@ module Ear
   def load_follower_objects(username, page_count)
     follower_set = {}
     (1..page_count).each do |x|
-      one_pass = @client.followers.username? # :page => x)
+      one_pass = @client.followers? username # :page => x)
       one_pass.each do |x|
         # next unless x.is_a?(Mash)
         follower_set[x.id] = {:name => x.name, :icon => x.profile_image_url, :screen_name => x.screen_name }
