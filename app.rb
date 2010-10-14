@@ -163,6 +163,8 @@ get '/show' do
 
   @following = do_they_follow_you(@otheruser, @id)
 
+  return "Did the join\n\n#{@following.inspect}"
+
   erb :results
   end
 end
