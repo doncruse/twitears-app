@@ -1,29 +1,23 @@
-# require "rubygems"
 require "sinatra"
 require "oauth"
 require "oauth/consumer"
 require 'grackle'
 require 'haml'
-#require 'active_support'
+require 'memcached'
 
 enable :sessions
 
-# TODO: See what changes are needed from using Grackle instead of Twitter
-# or see if I can fall back to the Twitter gem...
-# require 'twitter'
-require 'lib/cache'
 require 'lib/logic'
 include Ear
 
 POPULARITY_LIMIT = 5000
-DEFAULT_TTL = 7200
+DEFAULT_TTL = 72000
 
 configure do
   require 'memcached'
   CACHE = Memcached.new
 end
 
-# renamed @client to @twitter to fit how I've set this up...
 before do
   session[:oauth] ||= {}  
   
@@ -51,7 +45,7 @@ before do
   end
 end
 
-# to simplify this part of the results screen
+# For displaying results
 helpers do
   def following_me_status(following)
     if following
@@ -91,20 +85,13 @@ end
 
 post '/user' do
   if params[:username].blank?
-#    response.delete_cookie("user_info")
     @access_token = nil
     erb :start
   else
     user_obj = lookup_user_on_twitter(params[:username].downcase)
     if too_popular(user_obj)  
       @popular_user = params[:username] || "You"
-#      response.delete_cookie("user_info")
       erb :selfpopularity
-#    else
-#      set_user_info(user_obj)
-#      if request.cookies["user_info"].blank?  # if the browser chokes on persistent cookie
-#        set_session_user_info(user_obj)
-#      end
       redirect '/'
     end
   end
@@ -119,13 +106,13 @@ get '/show' do
     redirect '/'
   end
 
-  # check to make sure other user is not too cool for school
   other_user_obj = lookup_user_on_twitter(@otheruser)
   if other_user_obj.nil?
     @error = "Couldn't find that user."
     redirect '/'
   end
 
+    # check to make sure other user is not too cool for school
   if too_popular(other_user_obj)
     erb :popularity
   else
@@ -157,7 +144,7 @@ get '/show' do
 end
 
 post '/show' do
-#  redirect '/' if params[:otheruser].empty?
+  redirect '/' if params[:otheruser].empty?
   redirect "/show?otheruser=#{params[:otheruser]}"
 end
 
