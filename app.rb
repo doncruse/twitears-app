@@ -143,7 +143,7 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
-  return "#{(@client.friendships.show.json? :target_screen_name => @otheruser).target.inspect}"
+  return "#{(@client.friendships.show.json? :target_screen_name => @otheruser).following.inspect}"
 
   do_they_follow_you(@otheruser, @user_name)
 
