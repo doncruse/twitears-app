@@ -4,9 +4,9 @@ This is a simple webapp, designed to be used from an iPhone, to see your mutual 
 
 ## Background
 
-You might think of your @replies as being more like dinner conversation when you have other friends seated at the same table.  Twitter assumes that, if you follow two friends, you might be interested in hearing a conversation between the two of them.
+You might think of your @replies as a dinner conversation with other friends seated at the same table.  Twitter assumes that, if you follow two friends, you might be interested in hearing a conversation between the two of them.  
 
-So, when you send an @reply, Twitter shows the message to the people who follow both you and the person you are messaging.
+So, when you send an @reply, Twitter shows the message to the people who follow *both* you and the person you are messaging.
 
 An @reply is a useful way for a group to communicate, but it's not a private message.  It still appears on your profile page and in search results.
 
@@ -14,7 +14,7 @@ Checking to see who follows your @reply conversations can help you see how big a
 
 ## Does the Target of My @Reply Always See It in Their Timeline?
 
-No.  Unless they follow you, your message will not show up in their main timeline.  But there is still hope.  Your message will still show up under the Mentions tab (what shows up as their username in the sidebar), so most users will eventually get your message.
+No.  Unless they follow you, your message will not show up in their main timeline.  But there is still hope.  Your message will still show up under the Mentions tab, so most users will eventually get your message.
 
 An @reply sent to someone who doesn't follow you (say, a web celebrity) is a kind of shout out to them.  They might not be paying attention, but the friends closer to you (who also happen to follow that same celebrity) would hear you loud and clear.
 
