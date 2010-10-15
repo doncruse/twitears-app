@@ -2,8 +2,6 @@ require "sinatra"
 require "oauth"
 require "oauth/consumer"
 require 'grackle'
-require 'haml'
-require 'memcached'
 
 enable :sessions
 
@@ -128,10 +126,6 @@ get '/show' do
   if (other_follows == false) or (other_follows.empty?)
     @error = "Twitter choked on that username.  Please try again."
     redirect '/'
-  end
-
-  unless (my_follows.size == @no)
-    reset_follower_count(@no)
   end
 
   joined_ids = mutual_follower_ids(my_follows, other_follows)

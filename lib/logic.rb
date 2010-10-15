@@ -1,10 +1,5 @@
-# require 'twitter'
-
 module Ear
 
-  ## The cookie store
-  ####################
-  
   def load_user_info
     unless @client and (current_user = @client.account.verify_credentials?)
       redirect '/'
@@ -16,6 +11,7 @@ module Ear
     @no = current_user.followers_count
   end
 
+=begin
   def too_popular(user_obj)
     user_obj.followers_count.to_i > POPULARITY_LIMIT
   end
@@ -53,6 +49,7 @@ module Ear
     response.set_cookie("user_info", { :value => whole, :expires => future, :domain => "twitears.heroku.com" } )
     @no = number
   end
+=end
 
   ## Simple Twitter interactions
   ####################
@@ -92,48 +89,8 @@ module Ear
     end
   end
 
-=begin
-  def calculate_page_count(follower_count)
-    begin
-      (follower_count / 100).to_i + 1
-    rescue
-      1
-    end
-  end
-
-  # N.B., pagination has been replaced with cursors
-  def load_follower_objects(username, page_count)
-    follower_set = {}
-    (1..page_count).each do |x|
-      one_pass = @client.followers? :screen_name => username # :page => x)
-      one_pass.each do |x|
-        # next unless x.is_a?(Mash)
-        follower_set[x.id] = {:name => x.name, :icon => x.profile_image_url, :screen_name => x.screen_name }
-      end
-    end
-    follower_set
-  end
-
-  def retrieve_follower_objects(username)
-    # get from cache OR retrieve
-  end
-=end
-  
-  
-  # Calculations
-  ##############
-  
-=begin
-  def mutual_followers(my_follows, other_follows, follower_set)
-    joined_ids = other_follows & my_follows
-    joined_followers = []
-    i = 0
-    joined_ids.each do |x|
-      joined_followers << follower_set[x]
-    end
-    joined_followers
-  end
-=end
+  #  Doing the the join calculations
+  ################
 
   def mutual_follower_ids(my_follows, other_follows)
     other_follows & my_follows
