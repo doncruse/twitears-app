@@ -150,7 +150,7 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
-  @following = do_they_follow_you(other_follows, @id)
+  @following = do_they_follow_you(other_follows, @user_id)
 
   erb :results
   end
