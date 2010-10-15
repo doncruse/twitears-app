@@ -4,7 +4,7 @@
 	<div id="results_cloud_intro">
 	@<%= @popular_user %> has more than <%= POPULARITY_LIMIT %> followers.<br/><br />TwitEars cannot yet display results for someone so popular.<br />
 	</div>	<form method="post" action="/user">
-	<label>@</label><input type="text" name="username" value="<%= @username %>" /> <button type="submit">Enter</button>
+	<label>@</label><input type="text" name="username" value="<%= @user_name %>" /> <button type="submit">Enter</button>
 	</form>
 	<div id="no_pass_required">No password is required.</div>
 </div>
