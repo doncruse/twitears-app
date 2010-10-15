@@ -70,7 +70,8 @@ module Ear
   end
 
   def do_they_follow_you(them,you)
-    @following ||= @client.friendships.exists.json? :user_a => them, :user_b => you
+    response = @client.friendships.exists.json? :user_a => them, :user_b => you
+    @following ||= response
   end
 
 end
