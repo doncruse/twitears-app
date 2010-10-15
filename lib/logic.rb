@@ -145,7 +145,7 @@ module Ear
       item = user_by_id_from_cache(id)
       result << item unless item.nil?
     end
-    result.sort { |x,y| x.name <=> y.name }
+    result.sort { |x,y| x.name.downcase <=> y.name.downcase }
   end
 
   def do_they_follow_you(other_follows, your_id)
