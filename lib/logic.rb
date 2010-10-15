@@ -50,7 +50,7 @@ module Ear
     parts[4] = number
     whole = parts.join("|")
     future = (Time.now + 30000) #.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-    response.set_cookie("user_info", { :value => whole, :expires => future, :domain => "twitears.com" } )
+    response.set_cookie("user_info", { :value => whole, :expires => future, :domain => "twitears.heroku.com" } )
     @no = number
   end
 
