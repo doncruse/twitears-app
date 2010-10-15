@@ -15,42 +15,6 @@ module Ear
     user_obj.followers_count.to_i > POPULARITY_LIMIT
   end
 
-=begin
-  def set_user_info(user_obj)
-    unless user_obj.nil? or user_obj.screen_name.blank?
-      whole = [user_obj.screen_name,
-              user_obj.id,
-              user_obj.name,
-              user_obj.profile_image_url,
-              user_obj.followers_count].join("|")
-      future = (Time.now + 3000) #.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-      response.set_cookie("user_info", { :value => whole, :expires =>  future, :domain => "twitears.heroku.com" } )
-    end
-  end
-
-  def set_session_user_info(user_obj)
-    unless user_obj.nil? or user_obj.screen_name.blank?
-      whole = [user_obj.screen_name,
-              user_obj.id,
-              user_obj.name,
-              user_obj.profile_image_url,
-              user_obj.followers_count].join("|")
-      response.set_cookie("user_info", whole)
-    end
-  end
-
-  
-  def reset_follower_count(number)
-    old = request.cookies["user_info"]
-    parts = old.split("|")
-    parts[4] = number
-    whole = parts.join("|")
-    future = (Time.now + 30000) #.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-    response.set_cookie("user_info", { :value => whole, :expires => future, :domain => "twitears.heroku.com" } )
-    @no = number
-  end
-=end
-
   ## Simple Twitter interactions
   ####################
 

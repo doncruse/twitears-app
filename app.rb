@@ -8,6 +8,12 @@ enable :sessions
 require 'lib/logic'
 include Ear
 
+  # TODO:  In order to go about 5000 for the popularity limit, I need to
+  #        add paging (cursor) for the follower_ids
+
+  # TODO:  To speed this up, I should investigate ways to retrieve more 
+  #        than one user's profile information at a time
+
 POPULARITY_LIMIT = 5000
 DEFAULT_TTL = 72000
 
@@ -15,6 +21,9 @@ configure do
   require 'memcached'
   CACHE = Memcached.new
 end
+
+  # If you've logged in, initalize your data
+  ####################
 
 before do
   session[:oauth] ||= {}  
@@ -43,7 +52,9 @@ before do
   end
 end
 
-# For displaying results
+  # Some of the language used on the results page
+  ####################
+
 helpers do
   def following_me_status(following)
     if following
@@ -70,7 +81,8 @@ helpers do
   end
 end
 
-##########################
+  # The URL map for Sinatra is below
+  ##########################
 
 get '/' do
   if @access_token
@@ -146,7 +158,8 @@ get '/about' do
   erb :about
 end
 
-## Oauth methods for Twitter
+  ## These URLs implement Oauth login for Twitter
+  ###########################
 
 get "/request" do
   @request_token = @consumer.get_request_token(:oauth_callback => "http://#{request.host}/auth")
