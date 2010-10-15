@@ -145,18 +145,7 @@ get '/show' do
 
   unless (my_follows.size == @no)
     reset_follower_count(@no)
-    # TODO: may want to alert user or trigger a cache refresh
   end
-
-  # first compute the intersection
-  # then load up a result set,
-  #    working first from cache
-  #    with twitter API as fallback
-
-#  follower_set = Sinatra::Cache.cache("#{@username}-follower-objects") do
-#    pages = calculate_page_count(my_follows.size)
-#    load_follower_objects(@user_name, pages)
-#  end
 
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)

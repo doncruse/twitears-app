@@ -144,13 +144,8 @@ module Ear
     result
   end
 
-  def do_they_follow_you(otheruser, your_id)
-#    begin
-      friendship = @client.friendships.show? :target_screen_name => otheruser
-      return friendship.target.following
-#    rescue
-#      return false
-#    end
+  def do_they_follow_you(other_follows, your_id)
+    other_follows.include?(your_id)
   end
 
 end
