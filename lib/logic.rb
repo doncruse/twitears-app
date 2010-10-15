@@ -69,9 +69,17 @@ module Ear
     result.sort { |x,y| x.name.downcase <=> y.name.downcase }
   end
 
-  def do_they_follow_you(them,you)
-    response = @client.friendships.exists.json? :user_a => them, :user_b => you
-    @following ||= response
+  # OPTIMIZE: Replace with twitter's friendships/show? method, but that
+  #           returns a nested data structure that is messing up Grackle
+  #           because there's not an elegant way to nest OpenStruct, which
+  #           is what it converts to by default
+  def do_they_follow_you(their_name,your_id)
+    @following ||= response = begin
+      ids_they_follow = @client.followers.ids? :screen_name => their_name
+      ids_they_follow.include?(your_id)
+    rescue
+      false
+    end
   end
 
 end
