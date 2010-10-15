@@ -74,11 +74,11 @@ module Ear
   #           because there's not an elegant way to nest OpenStruct, which
   #           is what it converts to by default
   def do_they_follow_you(their_name,your_id)
-    @following ||= response = begin
-      ids_they_follow = @client.followers.ids? :screen_name => their_name
-      ids_they_follow.include?(your_id)
+    begin
+      ids_they_follow = @client.friends.ids? :screen_name => their_name
+      return ids_they_follow.include?(your_id)
     rescue
-      false
+      return false
     end
   end
 
