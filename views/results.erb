@@ -21,6 +21,7 @@
 <div id="results_cloud">
 <ul>
 <% for item in @joined %>
+<% next unless item %>
 <div class="cloud_item">
 <a href="http://twitears.heroku.com/show?otheruser=<%= item.screen_name %>"><img src="<%= item.profile_image_url %>" alt="@" width=48 height=48><br /><%= item.name %></a></div>
 <% end %>

@@ -133,12 +133,12 @@ get '/show' do
   my_follows = get_follower_info(@user_name)
   other_follows = get_follower_info(@otheruser)
 
-  if my_follows == false
+  if (my_follows == false) or (my_follows.empty?)
     @error = "That username does not seem to have any followers."
     redirect '/'
   end
 
-  if other_follows == false
+  if (other_follows == false) or (other_follows.empty?)
     @error = "Twitter choked on that username.  Please try again."
     redirect '/'
   end
