@@ -143,12 +143,12 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
-  xml = @client.friendships.show.xml? :target_screen_name => @otheruser
-  doc = REXML::Document.new(xml)
+  xml = @client.friendships.show? :target_screen_name => @otheruser
+#  doc = REXML::Document.new(xml)
 #  status = doc('/target/following')
   #tf = os.target.following
   
-  return "#{doc.inspect}\n\n"
+  return "#{xml.to_s}\n\n"
 
   do_they_follow_you(@otheruser, @user_name)
 
