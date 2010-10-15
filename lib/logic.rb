@@ -11,11 +11,11 @@ module Ear
     @no = current_user.followers_count
   end
 
-=begin
   def too_popular(user_obj)
     user_obj.followers_count.to_i > POPULARITY_LIMIT
   end
 
+=begin
   def set_user_info(user_obj)
     unless user_obj.nil? or user_obj.screen_name.blank?
       whole = [user_obj.screen_name,
