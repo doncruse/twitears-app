@@ -144,9 +144,9 @@ get '/show' do
   @joined = populate_mutual_followers(joined_ids)
 
   os = @client.friendships.show.json? :target_screen_name => @otheruser
-  tf = os.target.following
+  #tf = os.target.following
   
-  return "#{os.inspect}\n\n#{tf}"
+  return "#{os.inspect}\n\n"
 
   do_they_follow_you(@otheruser, @user_name)
 
