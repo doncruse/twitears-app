@@ -143,6 +143,8 @@ get '/show' do
   joined_ids = mutual_follower_ids(my_follows, other_follows)
   @joined = populate_mutual_followers(joined_ids)
 
+  return "#{(@client.friendships.exists.json? :user_a => them, :user_b => you).inspect}"
+
   do_they_follow_you(@otheruser, @user_name)
 
   erb :results
