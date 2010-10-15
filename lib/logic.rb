@@ -69,8 +69,8 @@ module Ear
     result.sort { |x,y| x.name.downcase <=> y.name.downcase }
   end
 
-  def do_they_follow_you(other_follows, your_id)
-    other_follows.include?(your_id)
+  def do_they_follow_you(them,you)
+    @following ||= @client.friendships.exists.json? :user_a => them, :user_b => you
   end
 
 end
