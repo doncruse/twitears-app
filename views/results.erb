@@ -22,7 +22,7 @@
 <ul>
 <% for item in @joined %>
 <div class="cloud_item">
-<a href="http://twitears.com/show?otheruser=<%= item.screen_name %>"><img src="<%= item.profile_background_image_url %>" alt="@" width=48 height=48><br /><%= item.name %></a></div>
+<a href="http://twitears.com/show?otheruser=<%= item.screen_name %>"><img src="<%= item.profile_image_url %>" alt="@" width=48 height=48><br /><%= item.name %></a></div>
 <% end %>
 </ul>
 <div style="clear: both;"></div>
