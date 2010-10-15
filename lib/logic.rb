@@ -73,12 +73,15 @@ module Ear
   def user_by_id_from_cache(id)
     begin
       result = CACHE.get(id.to_s)
+      return result
     rescue
       result = @client.users.show? :id => id
       if result and result.id
         CACHE.set(id.to_s,result)
+        return result
       end
     end
+    return nil
   end
   
   def get_follower_info(username)
@@ -139,7 +142,8 @@ module Ear
   def populate_mutual_followers(mutual_ids)
     result = []
     mutual_ids.each do |id|
-      result << user_by_id_from_cache(id)
+      item = user_by_id_from_cache(id)
+      result << item unless item.nil?
     end
     result
   end
