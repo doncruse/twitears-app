@@ -144,7 +144,7 @@ get '/show' do
   @joined = populate_mutual_followers(joined_ids)
 
   doc = @client.friendships.show? :target_screen_name => @otheruser
-  t = doc.target
+  t = doc.target[:following]
 #  doc = REXML::Document.new(xml)
 #  status = doc('/target/following')
   #tf = os.target.following
